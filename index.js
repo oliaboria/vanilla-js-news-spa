@@ -1,3 +1,4 @@
+import Renderer from './src/renderer';
 import Router from './src/router';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,7 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const router = new Router(routerConfig);
 
     router.onRouteChange((template) => {
-        console.log(template);
+        const rootElement = document.getElementById('root');
+        Renderer.render(rootElement, template);
     });
 
     const navLinks = document.querySelectorAll('.navigation-item');

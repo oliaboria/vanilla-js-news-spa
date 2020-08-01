@@ -12,7 +12,7 @@ const routerConfig = [
     },
     {
         path: '/comments/:id',
-        template: '<div>comments</div>',
+        template: '<comment-page />',
     },
 ];
 

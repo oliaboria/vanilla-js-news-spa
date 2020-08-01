@@ -1,11 +1,6 @@
 import sanitizeHtml from 'sanitize-html';
 
-const allowedTags = [
-    ...sanitizeHtml.defaults.allowedTags,
-    'news-item',
-    'home-page',
-    'list-container',
-];
+import allowedTags from '../../config/renderer.config';
 
 class Renderer {
     static render(element, unsafeHtmlString) {

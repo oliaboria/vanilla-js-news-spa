@@ -25,18 +25,22 @@ class ListContainer extends HTMLElement {
         const listHtml = document.createDocumentFragment();
         this.#listEl.innerHTML = '';
 
-        this.#listItems.forEach((listItem, index) => {
-            const itemHtml = document.createElement(this.#config.component);
-            const dataAttr = JSON.stringify(listItem);
-            const indexAttr = JSON.stringify(index);
-
-            itemHtml.setAttribute('data-content', dataAttr);
-            itemHtml.setAttribute('index', indexAttr);
+        this.#listItems.forEach((listItem) => {
+            const itemHtml = this.#renderListItem(listItem);
 
             listHtml.appendChild(itemHtml);
         });
 
         this.#listEl.append(listHtml);
+    }
+
+    #renderListItem(listItem) {
+        const itemHtml = document.createElement(this.#config.component);
+        const dataAttr = JSON.stringify(listItem);
+
+        itemHtml.setAttribute('data-content', dataAttr);
+
+        return itemHtml;
     }
 
     get #config() {

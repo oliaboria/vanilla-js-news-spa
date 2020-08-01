@@ -34,21 +34,30 @@ class HomePage extends HTMLElement {
         } else {
             this.#root.innerHTML = '';
             const homeHtml = document.createDocumentFragment();
-            const listEl = document.createElement('list-container');
-            const loadMoreEl = document.createElement('load-more');
-
-            listEl.setAttribute('config', JSON.stringify(this.#listConfig));
-            loadMoreEl.setAttribute('page', JSON.stringify(this.#currentPage));
-
-            loadMoreEl.addEventListener(
-                'onLoadMore',
-                this.#onLoadMore.bind(this),
-            );
+            const listEl = this.#renderList();
+            const loadMoreEl = this.#renderLoadMore();
 
             homeHtml.appendChild(listEl);
             homeHtml.appendChild(loadMoreEl);
             this.#root.appendChild(homeHtml);
         }
+    }
+
+    #renderLoadMore() {
+        const loadMoreEl = document.createElement('load-more');
+
+        loadMoreEl.setAttribute('page', JSON.stringify(this.#currentPage));
+        loadMoreEl.addEventListener('onLoadMore', this.#onLoadMore.bind(this));
+
+        return loadMoreEl;
+    }
+
+    #renderList() {
+        const listEl = document.createElement('list-container');
+
+        listEl.setAttribute('config', JSON.stringify(this.#listConfig));
+
+        return listEl;
     }
 
     get #loading() {

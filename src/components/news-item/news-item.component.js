@@ -38,17 +38,42 @@ class NewsItem extends HTMLElement {
     }
 
     render() {
-        const { title, url, descendants } = this.#data;
-        const host = getUrlHost(url);
+        this.#renderTitle();
+        this.#renderSite();
+        this.#renderAdditionalInformationText();
+        this.#renderComments();
+    }
+
+    #renderTitle() {
+        const { title, url } = this.#data;
 
         this.#titleEl.innerText = title;
-        this.#titleEl.setAttribute('href', url);
+        url && this.#titleEl.setAttribute('href', url);
+    }
 
-        this.#siteEl.innerText = `(${host})`;
+    #renderSite() {
+        const { url } = this.#data;
+        const host = getUrlHost(url);
 
-        this.#additionalInfEl.innerText = this.#getAdditionalInformationText();
+        if (host) {
+            this.#siteEl.innerText = `(${host})`;
+        }
+    }
 
-        this.#commentsEl.innerText = `${descendants} comments`;
+    #renderComments() {
+        const { descendants } = this.#data;
+        if (descendants) {
+            this.#commentsEl.innerText = `${descendants} comments`;
+        }
+    }
+
+    #renderAdditionalInformationText() {
+        const { score, by, time } = this.#data;
+        const scoreStr = score ? `${score} points ` : '';
+        const byStr = by ? `by ${by} ` : by;
+        const timeStr = time ? `${timeSince(time)} ago` : '';
+
+        this.#additionalInfEl.innerText = `${scoreStr}${byStr}${timeStr}`;
     }
 
     get #data() {
@@ -63,13 +88,6 @@ class NewsItem extends HTMLElement {
     // eslint-disable-next-line class-methods-use-this
     siteClickHandler(e) {
         e.preventDefault();
-    }
-
-    #getAdditionalInformationText() {
-        const { score, by, time } = this.#data;
-        const timeSinceStr = timeSince(time);
-
-        return `${score} points by ${by} ${timeSinceStr} ago`;
     }
 }
 

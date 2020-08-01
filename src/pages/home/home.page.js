@@ -33,10 +33,16 @@ class HomePage extends HTMLElement {
             this.#root.innerHTML = '';
             const homeHtml = document.createDocumentFragment();
             const listEl = document.createElement('list-container');
+            const loadMoreEl = document.createElement('load-more');
 
             listEl.setAttribute('config', JSON.stringify(this.#listConfig));
+            loadMoreEl.addEventListener(
+                'onLoadMore',
+                this.onLoadMore.bind(this),
+            );
 
             homeHtml.appendChild(listEl);
+            homeHtml.appendChild(loadMoreEl);
             this.#root.appendChild(homeHtml);
         }
     }
@@ -50,12 +56,18 @@ class HomePage extends HTMLElement {
     }
 
     async #fetchStories() {
+        console.log('fetchStories');
         this.#loading = true;
 
         const stories = await fetchTopStories('$key', 30);
         store.setItem('topStories', stories);
 
         this.#loading = false;
+    }
+
+    onLoadMore(e) {
+        console.log('load');
+        this.#fetchStories();
     }
 }
 

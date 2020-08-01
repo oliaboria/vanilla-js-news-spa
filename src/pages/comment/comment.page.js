@@ -1,4 +1,5 @@
-import { fetchItem } from '../../api';
+import { fetchItemById } from '../../api';
+import router from '../../config/router.config';
 import store from '../../config/store.config';
 
 class CommentPage extends HTMLElement {
@@ -10,9 +11,8 @@ class CommentPage extends HTMLElement {
 
     constructor() {
         super();
-        console.log(1);
+
         this.#root = this.attachShadow({ mode: 'open' });
-        console.log(1);
     }
 
     async connectedCallback() {
@@ -41,15 +41,12 @@ class CommentPage extends HTMLElement {
         store.setItem('newsItem', {});
         this.#loading = true;
 
-        this.#getItemId();
-        // const item = await fetchItem('$key', pageSize);
+        const { id } = router.getParams(window.location.pathname);
+        const item = await fetchItemById(id);
+        console.log(item);
         // store.setItem('topStories', stories);
 
         this.#loading = false;
-    }
-
-    #getItemId() {
-        console.log(window.location.pathname);
     }
 
     get #loading() {

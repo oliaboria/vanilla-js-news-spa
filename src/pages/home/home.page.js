@@ -9,6 +9,10 @@ class HomePage extends HTMLElement {
     constructor() {
         super();
         this.root = this.attachShadow({ mode: 'open' });
+        this.listConfig = {
+            storeKey: 'topStories',
+            component: 'news-item',
+        };
     }
 
     async connectedCallback() {
@@ -26,6 +30,9 @@ class HomePage extends HTMLElement {
             this.root.innerHTML = '';
             const homeHtml = document.createDocumentFragment();
             const listEl = document.createElement('list-container');
+
+            listEl.setAttribute('config', JSON.stringify(this.listConfig));
+
             homeHtml.appendChild(listEl);
             this.root.appendChild(homeHtml);
         }

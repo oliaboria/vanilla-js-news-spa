@@ -1,3 +1,5 @@
+import store from '../../utils/store';
+
 import template from './list-container.component.template';
 
 class ListContainer extends HTMLElement {
@@ -8,16 +10,30 @@ class ListContainer extends HTMLElement {
 
     connectedCallback() {
         this.root.appendChild(template.content.cloneNode(true));
-        this.listEl = this.root.getSelector('list-container');
+        this.listEl = this.root.querySelector('.list-container');
+
+        this.listItems = store.getItem(this.config.storeKey);
 
         this.render();
     }
 
     render() {
-        const todosHtml = document.createDocumentFragment();
-        this.listEl.innerHTML = 'List';
+        const listItemHtml = document.createDocumentFragment();
+        this.listEl.innerHTML = '';
 
-        this.listEl.append(todosHtml);
+        this.listItems.forEach((listItem) => {
+            const itemHtml = document.createElement(this.config.component);
+            const attr = JSON.stringify(listItem);
+            itemHtml.setAttribute('data-content', attr);
+
+            listItemHtml.appendChild(itemHtml);
+        });
+
+        this.listEl.append(listItemHtml);
+    }
+
+    get config() {
+        return JSON.parse(this.getAttribute('config')) || {};
     }
 }
 

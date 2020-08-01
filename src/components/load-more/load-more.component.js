@@ -1,8 +1,12 @@
+import { PAGE_SIZE } from '../../constants';
+
 import template from './load-more.component.template';
 
 class LoadMore extends HTMLElement {
     #root;
     #loadMore;
+    #currentPage;
+    #limitTo = PAGE_SIZE;
 
     constructor() {
         super();
@@ -13,14 +17,19 @@ class LoadMore extends HTMLElement {
         this.#root.appendChild(template.content.cloneNode(true));
 
         this.#loadMore = this.#root.querySelector('.load-more-btn');
+        this.#currentPage = JSON.parse(this.getAttribute('page'));
 
-        this.#loadMore.addEventListener('click', this.#onClick.bind(this));
+        this.#loadMore.addEventListener('click', this.#nextPage.bind(this));
     }
 
-    #onClick(e) {
+    #nextPage(e) {
         e.preventDefault();
-        console.log('onClick');
-        this.dispatchEvent(new CustomEvent('onLoadMore'));
+        const page = this.#currentPage + 1;
+        const pageSize = page * this.#limitTo;
+
+        this.dispatchEvent(
+            new CustomEvent('onLoadMore', { detail: { pageSize, page } }),
+        );
     }
 }
 

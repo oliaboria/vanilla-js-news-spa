@@ -6,3 +6,5 @@ export const API_PATH_NAMES = {
 };
 
 export const PRETTY_PRINT = 'print=pretty';
+
+export const PAGE_SIZE = 20;

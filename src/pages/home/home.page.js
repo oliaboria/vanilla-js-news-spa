@@ -1,9 +1,11 @@
 import { fetchTopStories } from '../../api';
+import { PAGE_SIZE } from '../../constants';
 import store from '../../utils/store';
 
 class HomePage extends HTMLElement {
     #root;
     #listConfig;
+    #currentPage = 1;
 
     static get observedAttributes() {
         return ['loading'];
@@ -36,6 +38,8 @@ class HomePage extends HTMLElement {
             const loadMoreEl = document.createElement('load-more');
 
             listEl.setAttribute('config', JSON.stringify(this.#listConfig));
+            loadMoreEl.setAttribute('page', JSON.stringify(this.#currentPage));
+
             loadMoreEl.addEventListener(
                 'onLoadMore',
                 this.onLoadMore.bind(this),
@@ -55,19 +59,20 @@ class HomePage extends HTMLElement {
         this.setAttribute('loading', JSON.stringify(value));
     }
 
-    async #fetchStories() {
-        console.log('fetchStories');
+    async #fetchStories(pageSize = PAGE_SIZE) {
         this.#loading = true;
 
-        const stories = await fetchTopStories('$key', 30);
+        const stories = await fetchTopStories('$key', pageSize);
         store.setItem('topStories', stories);
 
         this.#loading = false;
     }
 
     onLoadMore(e) {
-        console.log('load');
-        this.#fetchStories();
+        const { pageSize, page } = e.detail;
+
+        this.#currentPage = page;
+        this.#fetchStories(pageSize);
     }
 }
 

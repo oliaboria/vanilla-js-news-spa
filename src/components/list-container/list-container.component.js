@@ -18,18 +18,21 @@ class ListContainer extends HTMLElement {
     }
 
     render() {
-        const listItemHtml = document.createDocumentFragment();
+        const listHtml = document.createDocumentFragment();
         this.listEl.innerHTML = '';
 
-        this.listItems.forEach((listItem) => {
+        this.listItems.forEach((listItem, index) => {
             const itemHtml = document.createElement(this.config.component);
-            const attr = JSON.stringify(listItem);
-            itemHtml.setAttribute('data-content', attr);
+            const dataAttr = JSON.stringify(listItem);
+            const indexAttr = JSON.stringify(index);
 
-            listItemHtml.appendChild(itemHtml);
+            itemHtml.setAttribute('data-content', dataAttr);
+            itemHtml.setAttribute('index', indexAttr);
+
+            listHtml.appendChild(itemHtml);
         });
 
-        this.listEl.append(listItemHtml);
+        this.listEl.append(listHtml);
     }
 
     get config() {

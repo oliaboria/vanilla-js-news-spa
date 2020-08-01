@@ -29,7 +29,7 @@ class HomePage extends HTMLElement {
     }
 
     render() {
-        if (this.loading) {
+        if (this.#loading) {
             this.#root.innerHTML = `Loading...`;
         } else {
             this.#root.innerHTML = '';
@@ -42,7 +42,7 @@ class HomePage extends HTMLElement {
 
             loadMoreEl.addEventListener(
                 'onLoadMore',
-                this.onLoadMore.bind(this),
+                this.#onLoadMore.bind(this),
             );
 
             homeHtml.appendChild(listEl);
@@ -60,6 +60,7 @@ class HomePage extends HTMLElement {
     }
 
     async #fetchStories(pageSize = PAGE_SIZE) {
+        store.setItem('topStories', []);
         this.#loading = true;
 
         const stories = await fetchTopStories('$key', pageSize);
@@ -68,7 +69,7 @@ class HomePage extends HTMLElement {
         this.#loading = false;
     }
 
-    onLoadMore(e) {
+    #onLoadMore(e) {
         const { pageSize, page } = e.detail;
 
         this.#currentPage = page;

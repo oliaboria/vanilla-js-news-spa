@@ -1,9 +1,11 @@
 import { fetchTopStories } from '../../api';
+import { PAGE_SIZE } from '../../constants';
 import store from '../../utils/store';
 
 class HomePage extends HTMLElement {
     #root;
     #listConfig;
+    #currentPage = 1;
 
     static get observedAttributes() {
         return ['loading'];
@@ -27,18 +29,35 @@ class HomePage extends HTMLElement {
     }
 
     render() {
-        if (this.loading) {
+        if (this.#loading) {
             this.#root.innerHTML = `Loading...`;
         } else {
             this.#root.innerHTML = '';
             const homeHtml = document.createDocumentFragment();
-            const listEl = document.createElement('list-container');
-
-            listEl.setAttribute('config', JSON.stringify(this.#listConfig));
+            const listEl = this.#renderList();
+            const loadMoreEl = this.#renderLoadMore();
 
             homeHtml.appendChild(listEl);
+            homeHtml.appendChild(loadMoreEl);
             this.#root.appendChild(homeHtml);
         }
+    }
+
+    #renderLoadMore() {
+        const loadMoreEl = document.createElement('load-more');
+
+        loadMoreEl.setAttribute('page', JSON.stringify(this.#currentPage));
+        loadMoreEl.addEventListener('onLoadMore', this.#onLoadMore.bind(this));
+
+        return loadMoreEl;
+    }
+
+    #renderList() {
+        const listEl = document.createElement('list-container');
+
+        listEl.setAttribute('config', JSON.stringify(this.#listConfig));
+
+        return listEl;
     }
 
     get #loading() {
@@ -49,13 +68,21 @@ class HomePage extends HTMLElement {
         this.setAttribute('loading', JSON.stringify(value));
     }
 
-    async #fetchStories() {
+    async #fetchStories(pageSize = PAGE_SIZE) {
+        store.setItem('topStories', []);
         this.#loading = true;
 
-        const stories = await fetchTopStories('$key', 30);
+        const stories = await fetchTopStories('$key', pageSize);
         store.setItem('topStories', stories);
 
         this.#loading = false;
+    }
+
+    #onLoadMore(e) {
+        const { pageSize, page } = e.detail;
+
+        this.#currentPage = page;
+        this.#fetchStories(pageSize);
     }
 }
 

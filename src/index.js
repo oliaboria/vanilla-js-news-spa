@@ -1,4 +1,5 @@
 import ListContainer from './components/list-container';
+import LoadMore from './components/load-more';
 import NewsItem from './components/news-item';
 import HomePage from './pages/home';
 import Renderer from './utils/renderer';
@@ -8,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.customElements.define('news-item', NewsItem);
     window.customElements.define('home-page', HomePage);
     window.customElements.define('list-container', ListContainer);
+    window.customElements.define('load-more', LoadMore);
 
     const routerConfig = [
         {

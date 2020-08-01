@@ -1,7 +1,7 @@
 const template = document.createElement('template');
 
 template.innerHTML = `
-    <div>Home</div>
+    <ul class="list-container">cont</<ul>
 `;
 
 export default template;

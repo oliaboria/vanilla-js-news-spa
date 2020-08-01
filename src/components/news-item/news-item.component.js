@@ -62,7 +62,7 @@ class NewsItem extends HTMLElement {
     }
 
     #renderComments() {
-        const { descendants, id } = this.#data;
+        const { descendants } = this.#data;
 
         if (descendants) {
             const url = this.#buildUrl();

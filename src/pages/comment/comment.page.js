@@ -27,14 +27,24 @@ class CommentPage extends HTMLElement {
         if (this.#loading) {
             this.#root.innerHTML = `Loading...`;
         } else {
-            this.#root.innerHTML = 'comm';
-            // const homeHtml = document.createDocumentFragment();
+            this.#root.innerHTML = '';
+            const commentPageHtml = document.createDocumentFragment();
+            const newsItemEl = this.#renderNews();
             // const listEl = this.#renderList();
             // const loadMoreEl = this.#renderLoadMore();
-            // homeHtml.appendChild(listEl);
+            commentPageHtml.appendChild(newsItemEl);
             // homeHtml.appendChild(loadMoreEl);
-            // this.#root.appendChild(homeHtml);
+            this.#root.appendChild(commentPageHtml);
         }
+    }
+
+    #renderNews() {
+        const el = document.createElement('news-item');
+        const data = store.getItem('newsItem');
+
+        el.setAttribute('data-content', JSON.stringify(data));
+
+        return el;
     }
 
     async #fetchNewsItem() {
@@ -43,8 +53,7 @@ class CommentPage extends HTMLElement {
 
         const { id } = router.getParams(window.location.pathname);
         const item = await fetchItemById(id);
-        console.log(item);
-        // store.setItem('topStories', stories);
+        store.setItem('newsItem', item);
 
         this.#loading = false;
     }

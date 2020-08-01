@@ -59,5 +59,8 @@
     "lint-staged": {
         "*.{js,jsx,ts,tsx}": "eslint --fix",
         "*.{css,scss}": "stylelint --fix"
+    },
+    "dependencies": {
+        "sanitize-html": "^1.27.2"
     }
 }

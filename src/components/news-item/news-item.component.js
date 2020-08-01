@@ -83,6 +83,8 @@ class NewsItem extends HTMLElement {
     // eslint-disable-next-line class-methods-use-this
     commentsClickHandler(e) {
         e.preventDefault();
+
+        const id = this.#data;
     }
 
     // eslint-disable-next-line class-methods-use-this

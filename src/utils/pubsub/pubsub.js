@@ -1,6 +1,8 @@
 class PubSub {
+    #listeners = [];
+
     constructor() {
-        this.listeners = [];
+        this.#listeners = [];
     }
 
     subscribe(fn) {

@@ -3,6 +3,7 @@
         "browser": true,
         "es2020": true
     },
+    "parser": "babel-eslint",
     "extends": [
         "airbnb-base",
         "plugin:import/errors",

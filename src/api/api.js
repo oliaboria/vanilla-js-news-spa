@@ -1,4 +1,4 @@
-import { API_PATH_NAMES, PRETTY_PRINT } from '../contsants';
+import { API_PATH_NAMES, PRETTY_PRINT } from '../constants';
 import request from '../utils/request';
 
 // eslint-disable-next-line import/prefer-default-export

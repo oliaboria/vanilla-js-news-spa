@@ -1,8 +1,8 @@
-import ListContainer from './src/components/list-container';
-import NewsItem from './src/components/news-item';
-import HomePage from './src/pages/home';
-import Renderer from './src/utils/renderer';
-import Router from './src/utils/router';
+import ListContainer from './components/list-container';
+import NewsItem from './components/news-item';
+import HomePage from './pages/home';
+import Renderer from './utils/renderer';
+import Router from './utils/router';
 
 document.addEventListener('DOMContentLoaded', () => {
     window.customElements.define('news-item', NewsItem);

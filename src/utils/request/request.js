@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../../contsants';
+import { API_BASE_URL } from '../../constants';
 
 const request = async (path, options) => {
     try {

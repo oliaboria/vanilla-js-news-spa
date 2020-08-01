@@ -1,19 +1,25 @@
 class Store {
-    constructor() {
-        this._store = {
-            topStories: [],
+    #store;
+
+    constructor(storeConfig) {
+        this.#store = {
+            ...storeConfig,
         };
     }
 
     setItem(key, value) {
-        this._store[key] = value;
+        this.#store[key] = value;
     }
 
     getItem(key) {
-        return this._store[key];
+        return this.#store[key];
     }
 }
 
-const store = new Store();
+const storeConfig = {
+    topStories: [],
+};
+
+const store = new Store(storeConfig);
 
 export default store;

@@ -40,6 +40,13 @@
         ],
         "no-underscore-dangle": ["off"],
         "no-param-reassign": ["off"],
+        "lines-between-class-members": [
+            "error",
+            "always",
+            { "exceptAfterSingleLine": true }
+        ],
+        "no-undef": ["off"],
+        "no-unused-vars": ["off"],
         "prettier/prettier": ["error"]
     },
     "overrides": [

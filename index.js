@@ -1,11 +1,22 @@
+import ListContainer from './src/components/list-container';
+import NewsItem from './src/components/news-item';
+import HomePage from './src/pages/home';
 import Renderer from './src/renderer';
 import Router from './src/router';
 
 document.addEventListener('DOMContentLoaded', () => {
+    window.customElements.define('news-item', NewsItem);
+    window.customElements.define('home-page', HomePage);
+    window.customElements.define('list-container', ListContainer);
+
     const routerConfig = [
         {
+            path: '/',
+            template: '<home-page />',
+        },
+        {
             path: '/news',
-            template: '<div>news</div>',
+            template: '<news-item />',
         },
         {
             path: '/comments/:id',

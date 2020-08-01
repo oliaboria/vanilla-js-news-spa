@@ -8,12 +8,13 @@ class Router extends PubSub {
             const regexp = path.replace(/:.+/g, '(\\d+)').replace(/\//g, '\\/');
 
             return {
-                pattern: new RegExp(regexp),
+                pattern: new RegExp(`^${regexp}$`),
                 template,
             };
         });
 
         this._listenForPopstate();
+        this._initializeFirstLoad();
     }
 
     _matchRoute() {
@@ -45,6 +46,10 @@ class Router extends PubSub {
 
     onRouteChange(fn) {
         this.subscribe(fn);
+    }
+
+    _initializeFirstLoad() {
+        setTimeout(() => this._handleRouteChange());
     }
 }
 

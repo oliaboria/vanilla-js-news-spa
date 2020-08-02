@@ -4,6 +4,7 @@ template.innerHTML = `
     <style>
         wired-textarea {
             margin: 20px 0;
+            width: calc(100% - 10px);
         }
         wired-button {
             display: block;

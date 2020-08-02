@@ -7,6 +7,14 @@ class CommentPage extends HTMLElement {
     #listConfig;
     #isError = false;
 
+    get #loading() {
+        return JSON.parse(this.getAttribute('loading'));
+    }
+
+    set #loading(value) {
+        this.setAttribute('loading', JSON.stringify(value));
+    }
+
     static get observedAttributes() {
         return ['loading'];
     }
@@ -38,6 +46,7 @@ class CommentPage extends HTMLElement {
             this.#root.innerHTML = '';
             const commentPageHtml = document.createDocumentFragment();
             const listWrapperEl = document.createElement('ul');
+            listWrapperEl.style = 'list-style: none; padding-left: 0;';
             const newsItemEl = this.#renderNews();
             const commentFormEl = this.#renderCommentForm();
             const commentsListEl = this.#renderCommentsList();
@@ -92,14 +101,6 @@ class CommentPage extends HTMLElement {
         }
 
         this.#loading = false;
-    }
-
-    get #loading() {
-        return JSON.parse(this.getAttribute('loading'));
-    }
-
-    set #loading(value) {
-        this.setAttribute('loading', JSON.stringify(value));
     }
 }
 

@@ -7,6 +7,10 @@ class ListContainer extends HTMLElement {
     #listEl;
     #listItems;
 
+    get #config() {
+        return JSON.parse(this.getAttribute('config')) || {};
+    }
+
     constructor() {
         super();
         this.#root = this.attachShadow({ mode: 'open' });
@@ -44,10 +48,6 @@ class ListContainer extends HTMLElement {
         itemHtml.setAttribute('config', JSON.stringify({ isDeviderVisible }));
 
         return itemHtml;
-    }
-
-    get #config() {
-        return JSON.parse(this.getAttribute('config')) || {};
     }
 }
 

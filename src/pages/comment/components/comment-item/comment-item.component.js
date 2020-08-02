@@ -1,4 +1,4 @@
-import timeSince from '../../utils/timeSince';
+import timeSince from '../../../../utils/timeSince';
 
 import template from './comment-item.component.template';
 
@@ -7,6 +7,10 @@ class CommentItem extends HTMLElement {
     #titleEl;
     #toogleEl;
     #descriptionEl;
+
+    get #data() {
+        return JSON.parse(this.getAttribute('data-content')) || {};
+    }
 
     constructor() {
         super();
@@ -54,10 +58,6 @@ class CommentItem extends HTMLElement {
         } else {
             this.#descriptionEl.classList.add('hide');
         }
-    }
-
-    get #data() {
-        return JSON.parse(this.getAttribute('data-content')) || {};
     }
 }
 

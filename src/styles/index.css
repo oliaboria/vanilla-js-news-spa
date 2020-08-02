@@ -1,0 +1,22 @@
+* {
+    font-family: 'Exchange MP Light Regular', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+        Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+        sans-serif;
+}
+
+body {
+    padding: 0 10px;
+}
+
+ul,
+ol {
+    padding-left: 0;
+    list-style: none;
+}
+
+@media (min-width: 1024px) {
+    body {
+        max-width: 1024px;
+        margin: 0 auto;
+    }
+}

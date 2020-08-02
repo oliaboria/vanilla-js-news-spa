@@ -29,12 +29,17 @@ class HeaderNav extends HTMLElement {
 
     #onClick(e) {
         const { target } = e;
+
         if (target.tagName !== 'WIRED-ITEM') {
             e.stopImmediatePropagation();
         }
 
         const newSelected = target.getAttribute('value');
         this.#list.setAttribute('selected', newSelected);
+
+        if (target.tagName === 'WIRED-LISTBOX') {
+            return;
+        }
 
         const url = target.getAttribute('href');
         router.navigateTo(url);

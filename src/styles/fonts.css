@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Exchange MP Light Regular';
+    src: url('./fonts/35d26a6395e9da3915cfb5ea1744e7d1.eot'); /* IE9*/
+    src: url('./fonts/35d26a6395e9da3915cfb5ea1744e7d1.eot?#iefix') format('embedded-opentype'), 
+    url('./fonts/35d26a6395e9da3915cfb5ea1744e7d1.woff2') format('woff2'), 
+    url('./fonts/35d26a6395e9da3915cfb5ea1744e7d1.woff') format('woff'), 
+    url('./fonts/35d26a6395e9da3915cfb5ea1744e7d1.ttf') format('truetype'), 
+    url('./fonts/35d26a6395e9da3915cfb5ea1744e7d1.svg#Exchange MP Light Regular') format('svg'); /* iOS 4.1- */
+}

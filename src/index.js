@@ -1,5 +1,6 @@
 import 'wired-elements/lib/wired-elements-iife';
 
+import CommentForm from './components/comment-form';
 import CommentItem from './components/comment-item';
 import HeaderNav from './components/header-nav';
 import ListContainer from './components/list-container';
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.customElements.define('comment-page', CommentPage);
     window.customElements.define('comment-item', CommentItem);
     window.customElements.define('toogle-btn', Toogle);
+    window.customElements.define('comment-form', CommentForm);
 
     const navLinks = document
         .querySelector('header-nav')

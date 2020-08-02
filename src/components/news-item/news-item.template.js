@@ -17,8 +17,6 @@ template.innerHTML = `
             |
             <a class="comments"></a>
         </p>
-
-        <wired-divider></wired-divider>
     </li>
 `;
 

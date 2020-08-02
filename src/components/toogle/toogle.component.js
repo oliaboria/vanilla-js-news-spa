@@ -5,9 +5,10 @@ class Toogle extends HTMLElement {
     #containerEl;
     #openBtnEl;
     #closeBtnEl;
+    #isOpen;
 
     static get observedAttributes() {
-        return ['isOpen'];
+        return ['is-open'];
     }
 
     constructor() {
@@ -31,31 +32,29 @@ class Toogle extends HTMLElement {
         this.render();
     }
 
+    attributeChangedCallback() {
+        this.render();
+    }
+
     render() {
-        if (this.#isOpen) {
-            this.#openBtnEl.classList.add('display');
-            this.#closeBtnEl.classList.remove('display');
+        if (!this.#isOpen) {
+            this.#openBtnEl.classList.add('hide');
+            this.#closeBtnEl.classList.remove('hide');
         } else {
-            this.#openBtnEl.classList.remove('display');
-            this.#closeBtnEl.classList.add('display');
+            this.#openBtnEl.classList.remove('hide');
+            this.#closeBtnEl.classList.add('hide');
         }
     }
 
     #onToogleClick(e) {
         e.preventDefault();
 
-        this.isOpen = !this.isOpen;
+        this.#isOpen = !this.#isOpen;
+        this.setAttribute('is-open', JSON.stringify(this.#isOpen));
+
         this.dispatchEvent(
-            new CustomEvent('OnToogle', { detail: { isOpen: this.isOpen } }),
+            new CustomEvent('OnToogle', { detail: { isOpen: this.#isOpen } }),
         );
-    }
-
-    get #isOpen() {
-        return JSON.parse(this.getAttribute('isOpen'));
-    }
-
-    set #isOpen(value) {
-        this.setAttribute('isOpen', JSON.stringify(value));
     }
 }
 

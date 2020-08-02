@@ -1,10 +1,19 @@
 const template = document.createElement('template');
 
 template.innerHTML = `
-    <div class="toogle-container">
-        <button class="more-btn-close">[more]</button>
-        <button class="more-btn-open">[-]</button>
-    </div>
+    <style>
+        .toogle-container {
+            display: inline-block;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+    <span class="toogle-container">
+        <wired-toggle class="more-btn-open" checked></wired-toggle>
+        <wired-toggle class="more-btn-close"></wired-toggle>
+    </span>
 `;
 
 export default template;

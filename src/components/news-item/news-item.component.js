@@ -39,6 +39,7 @@ class NewsItem extends HTMLElement {
         this.#renderSite();
         this.#renderAdditionalInformationText();
         this.#renderComments();
+        this.#renderDevidor();
     }
 
     #renderTitle() {
@@ -77,8 +78,20 @@ class NewsItem extends HTMLElement {
         this.#additionalInfEl.innerText = `${scoreStr}${byStr}${timeStr}`;
     }
 
+    #renderDevidor() {
+        if (this.#config.isDeviderVisible) {
+            const devidorEl = document.createElement('wired-divider');
+
+            this.#root.appendChild(devidorEl);
+        }
+    }
+
     get #data() {
         return JSON.parse(this.getAttribute('data-content')) || {};
+    }
+
+    get #config() {
+        return JSON.parse(this.getAttribute('config')) || {};
     }
 
     #commentsClickHandler(e) {
@@ -96,7 +109,7 @@ class NewsItem extends HTMLElement {
         return `/comments/${id}`;
     }
 
-    #isSameRoute(url) {
+    #isSameRoute() {
         return this.#buildUrl() === window.location.pathname;
     }
 }

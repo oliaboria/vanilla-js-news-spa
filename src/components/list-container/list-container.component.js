@@ -40,6 +40,9 @@ class ListContainer extends HTMLElement {
 
         itemHtml.setAttribute('data-content', dataAttr);
 
+        const { isDeviderVisible } = this.#config;
+        itemHtml.setAttribute('config', JSON.stringify({ isDeviderVisible }));
+
         return itemHtml;
     }
 

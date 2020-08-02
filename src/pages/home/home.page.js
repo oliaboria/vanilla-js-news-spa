@@ -17,6 +17,7 @@ class HomePage extends HTMLElement {
         this.#listConfig = {
             storeKey: 'topStories',
             component: 'news-item',
+            isDeviderVisible: true,
         };
     }
 

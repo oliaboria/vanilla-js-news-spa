@@ -30,10 +30,6 @@ class NewsItem extends HTMLElement {
             'click',
             this.#commentsClickHandler.bind(this),
         );
-        this.#siteEl.addEventListener(
-            'click',
-            this.siteClickHandler.bind(this),
-        );
 
         this.render();
     }
@@ -90,7 +86,9 @@ class NewsItem extends HTMLElement {
 
         const url = this.#buildUrl();
 
-        router.navigateTo(url);
+        if (!this.#isSameRoute()) {
+            router.navigateTo(url);
+        }
     }
 
     #buildUrl() {
@@ -98,9 +96,8 @@ class NewsItem extends HTMLElement {
         return `/comments/${id}`;
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    siteClickHandler(e) {
-        e.preventDefault();
+    #isSameRoute(url) {
+        return this.#buildUrl() === window.location.pathname;
     }
 }
 

@@ -1,3 +1,5 @@
+import router from '../../config/router.config';
+
 import template from './header-nav.component.template';
 
 class HeaderNav extends HTMLElement {
@@ -26,12 +28,16 @@ class HeaderNav extends HTMLElement {
     }
 
     #onClick(e) {
-        if (e.target.tagName !== 'WIRED-ITEM') {
+        const { target } = e;
+        if (target.tagName !== 'WIRED-ITEM') {
             e.stopImmediatePropagation();
         }
 
-        const newSelected = e.target.getAttribute('value');
+        const newSelected = target.getAttribute('value');
         this.#list.setAttribute('selected', newSelected);
+
+        const url = target.getAttribute('href');
+        router.navigateTo(url);
     }
 }
 

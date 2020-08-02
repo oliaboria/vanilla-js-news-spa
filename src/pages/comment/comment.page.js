@@ -5,6 +5,7 @@ import store from '../../config/store.config';
 class CommentPage extends HTMLElement {
     #root;
     #listConfig;
+    #isError = false;
 
     static get observedAttributes() {
         return ['loading'];
@@ -31,6 +32,8 @@ class CommentPage extends HTMLElement {
     render() {
         if (this.#loading) {
             this.#root.innerHTML = `<v-spinner></v-spinner>`;
+        } else if (this.#isError) {
+            this.#root.innerHTML = 'Oops... Something went wrong';
         } else {
             this.#root.innerHTML = '';
             const commentPageHtml = document.createDocumentFragment();
@@ -73,13 +76,20 @@ class CommentPage extends HTMLElement {
     async #fetchNewsItem() {
         store.setItem('newsItem', {});
         this.#loading = true;
+        this.#isError = false;
 
-        const { id } = router.getParams(window.location.pathname);
-        const item = await fetchItemById(id);
-        store.setItem('newsItem', item);
+        try {
+            const { id } = router.getParams(window.location.pathname);
+            const item = await fetchItemById(id);
+            store.setItem('newsItem', item);
 
-        const comments = await fetchComments(item.kids);
-        store.setItem('comments', comments);
+            const comments = await fetchComments(item.kids);
+            store.setItem('comments', comments);
+        } catch {
+            this.#isError = true;
+        } finally {
+            this.#loading = false;
+        }
 
         this.#loading = false;
     }

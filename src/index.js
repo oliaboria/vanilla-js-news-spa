@@ -8,7 +8,6 @@ import LoadMore from './components/load-more';
 import NewsItem from './components/news-item';
 import Spinner from './components/spinner';
 import Toogle from './components/toogle';
-import router from './config/router.config';
 import CommentPage from './pages/comment';
 import HomePage from './pages/home';
 
@@ -23,17 +22,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.customElements.define('comment-item', CommentItem);
     window.customElements.define('toogle-btn', Toogle);
     window.customElements.define('comment-form', CommentForm);
-
-    const navLinks = document
-        .querySelector('header-nav')
-        .shadowRoot.querySelectorAll('.navigation-item');
-
-    navLinks.forEach((link) => {
-        const url = link.getAttribute('href');
-
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            router.navigateTo(url);
-        });
-    });
 });

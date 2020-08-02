@@ -1,6 +1,6 @@
 # News SPA
 
-News SPA is based on vanilla js
+News SPA is based on vanilla js with hep of WebComponents
 
 ### Set up
 

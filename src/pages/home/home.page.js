@@ -6,6 +6,7 @@ class HomePage extends HTMLElement {
     #root;
     #listConfig;
     #currentPage = 1;
+    #isError = false;
 
     static get observedAttributes() {
         return ['loading'];
@@ -32,6 +33,8 @@ class HomePage extends HTMLElement {
     render() {
         if (this.#loading) {
             this.#root.innerHTML = `<v-spinner></v-spinner>`;
+        } else if (this.#isError) {
+            this.#root.innerHTML = 'Oops... Something went wrong';
         } else {
             this.#root.innerHTML = '';
             const homeHtml = document.createDocumentFragment();
@@ -71,12 +74,17 @@ class HomePage extends HTMLElement {
 
     async #fetchStories(pageSize = PAGE_SIZE) {
         store.setItem('topStories', []);
+        this.#isError = false;
         this.#loading = true;
 
-        const stories = await fetchTopStories('$key', pageSize);
-        store.setItem('topStories', stories);
-
-        this.#loading = false;
+        try {
+            const stories = await fetchTopStories('$key', pageSize);
+            store.setItem('topStories', stories);
+        } catch (e) {
+            this.#isError = true;
+        } finally {
+            this.#loading = false;
+        }
     }
 
     #onLoadMore(e) {

@@ -1,4 +1,4 @@
-import timeSince from '../../utils/timeSince';
+import timeSince from '../../../../utils/timeSince';
 
 import template from './comment-item.component.template';
 

@@ -2,13 +2,39 @@
 
 News SPA is based on vanilla js with hep of WebComponents
 
-### Set up
+## Available Scripts
 
--   `npm i` for node_modules setup/update
--   `npm run start` for development
--   `npm run build:dev` for development build
--   `npm run build:dist` for production build
--   `npm run test` for tests
--   `npm run lint` for js lint
--   `npm run lint:style` for style lint
--   `npm run format` for code format
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.<br /> Open
+[http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br /> You will also see any lint errors
+in the console.
+
+### `npm run lint`
+
+Runs eslint for js
+
+### `npm lint:style`
+
+Runs eslint for css and scss
+
+### `npm run format`
+
+Formats your code with prettier
+
+### `npm run build:dev`
+
+Builds code for development 
+
+### `npm run build:prod`
+
+Builds code for prodaction
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.<br /> See the section
+about

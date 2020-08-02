@@ -11,6 +11,14 @@ class NewsItem extends HTMLElement {
     #additionalInfEl;
     #commentsEl;
 
+    get #data() {
+        return JSON.parse(this.getAttribute('data-content')) || {};
+    }
+
+    get #config() {
+        return JSON.parse(this.getAttribute('config')) || {};
+    }
+
     constructor() {
         super();
         this.#root = this.attachShadow({ mode: 'open' });
@@ -84,14 +92,6 @@ class NewsItem extends HTMLElement {
 
             this.#root.appendChild(devidorEl);
         }
-    }
-
-    get #data() {
-        return JSON.parse(this.getAttribute('data-content')) || {};
-    }
-
-    get #config() {
-        return JSON.parse(this.getAttribute('config')) || {};
     }
 
     #commentsClickHandler(e) {

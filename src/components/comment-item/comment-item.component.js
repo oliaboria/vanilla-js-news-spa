@@ -8,6 +8,10 @@ class CommentItem extends HTMLElement {
     #toogleEl;
     #descriptionEl;
 
+    get #data() {
+        return JSON.parse(this.getAttribute('data-content')) || {};
+    }
+
     constructor() {
         super();
         this.#root = this.attachShadow({ mode: 'open' });
@@ -54,10 +58,6 @@ class CommentItem extends HTMLElement {
         } else {
             this.#descriptionEl.classList.add('hide');
         }
-    }
-
-    get #data() {
-        return JSON.parse(this.getAttribute('data-content')) || {};
     }
 }
 

@@ -8,6 +8,14 @@ class HomePage extends HTMLElement {
     #currentPage = 1;
     #isError = false;
 
+    get #loading() {
+        return JSON.parse(this.getAttribute('loading'));
+    }
+
+    set #loading(value) {
+        this.setAttribute('loading', JSON.stringify(value));
+    }
+
     static get observedAttributes() {
         return ['loading'];
     }
@@ -62,14 +70,6 @@ class HomePage extends HTMLElement {
         listEl.setAttribute('config', JSON.stringify(this.#listConfig));
 
         return listEl;
-    }
-
-    get #loading() {
-        return JSON.parse(this.getAttribute('loading'));
-    }
-
-    set #loading(value) {
-        this.setAttribute('loading', JSON.stringify(value));
     }
 
     async #fetchStories(pageSize = PAGE_SIZE) {

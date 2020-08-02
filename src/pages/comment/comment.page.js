@@ -7,6 +7,14 @@ class CommentPage extends HTMLElement {
     #listConfig;
     #isError = false;
 
+    get #loading() {
+        return JSON.parse(this.getAttribute('loading'));
+    }
+
+    set #loading(value) {
+        this.setAttribute('loading', JSON.stringify(value));
+    }
+
     static get observedAttributes() {
         return ['loading'];
     }
@@ -92,14 +100,6 @@ class CommentPage extends HTMLElement {
         }
 
         this.#loading = false;
-    }
-
-    get #loading() {
-        return JSON.parse(this.getAttribute('loading'));
-    }
-
-    set #loading(value) {
-        this.setAttribute('loading', JSON.stringify(value));
     }
 }
 

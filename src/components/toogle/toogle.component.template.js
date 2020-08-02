@@ -9,6 +9,9 @@ template.innerHTML = `
         .hide {
             display: none;
         }
+        wired-toggle {
+            --wired-toggle-on-color: pink;
+        }
     </style>
     <span class="toogle-container">
         <wired-toggle class="more-btn-open" checked></wired-toggle>

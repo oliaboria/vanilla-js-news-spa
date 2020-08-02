@@ -2,6 +2,11 @@
 
 News SPA is based on vanilla js with hep of WebComponents
 
+## Commands to quick start
+1. npm i
+2. npm start
+3. open [http://localhost:3000](http://localhost:3000)
+
 ## Available Scripts
 
 In the project directory, you can run:

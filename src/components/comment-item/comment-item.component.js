@@ -5,7 +5,8 @@ import template from './comment-item.component.template';
 class CommentItem extends HTMLElement {
     #root;
     #titleEl;
-    #toogleState;
+    #toogleEl;
+    #descriptionEl;
 
     constructor() {
         super();
@@ -16,19 +17,23 @@ class CommentItem extends HTMLElement {
         this.#root.appendChild(template.content.cloneNode(true));
 
         this.#titleEl = this.#root.querySelector('.title');
+        this.#toogleEl = this.#root.querySelector('toogle-btn');
+        this.#descriptionEl = this.#root.querySelector('.description');
+
+        this.#toogleEl.addEventListener(
+            'OnToogle',
+            this.#onToogleHandler.bind(this),
+        );
 
         this.render();
     }
 
     render() {
-        const listHtml = document.createDocumentFragment();
         this.#renderTitle();
-        const toogleEl = this.#renderToggle();
-        // this.#renderDesciption();
+        this.#renderDesciption();
     }
 
     #renderTitle() {
-        const titleEl = this.#root.querySelector('.title');
         const { by, time } = this.#data;
         const byStr = by ? `${by}` : '';
         const timeStr = time ? `${timeSince(time)} ago` : '';
@@ -36,16 +41,20 @@ class CommentItem extends HTMLElement {
         this.#titleEl.innerText = `${byStr}${timeStr}`;
     }
 
-    #renderToggle() {
-        const toogleEl = document.createElement('toogle');
+    #renderDesciption() {
+        const { text } = this.#data;
 
-        return toogleEl;
+        this.#descriptionEl.innerHtml = `${text}`;
     }
 
-    #renderDesciption() {}
+    #onToogleHandler(e) {
+        const { isOpen } = e.detail;
 
-    #onToogleClick() {
-        this.#toogleState = !this.#toogleState;
+        if (isOpen) {
+            this.#descriptionEl.classList.add('display');
+        } else {
+            this.#descriptionEl.classList.remove('display');
+        }
     }
 
     get #data() {

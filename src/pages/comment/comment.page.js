@@ -39,8 +39,8 @@ class CommentPage extends HTMLElement {
             const commentsListEl = this.#renderCommentsList();
 
             listWrapperEl.appendChild(newsItemEl);
+            listWrapperEl.appendChild(commentsListEl);
             commentPageHtml.appendChild(listWrapperEl);
-            commentPageHtml.appendChild(commentsListEl);
             this.#root.appendChild(commentPageHtml);
         }
     }

@@ -43,7 +43,11 @@ class Toogle extends HTMLElement {
 
     #onToogleClick(e) {
         e.preventDefault();
+
         this.isOpen = !this.isOpen;
+        this.dispatchEvent(
+            new CustomEvent('OnToogle', { detail: { isOpen: this.isOpen } }),
+        );
     }
 
     get #isOpen() {

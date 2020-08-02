@@ -44,7 +44,7 @@ class NewsItem extends HTMLElement {
     #renderTitle() {
         const { title, url } = this.#data;
 
-        this.#titleEl.innerText = title;
+        this.#titleEl.innerHTML = `<p>${title}</p>`;
         url && this.#titleEl.setAttribute('href', url);
     }
 

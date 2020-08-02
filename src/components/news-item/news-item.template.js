@@ -1,6 +1,12 @@
 const template = document.createElement('template');
 
 template.innerHTML = `
+    <style>
+        p {
+            width: 100%;
+            white-space: normal;
+        }
+    </style>
     <li class="news-item">
         <p>
             <a class="title-link"></a>
@@ -11,6 +17,8 @@ template.innerHTML = `
             |
             <a class="comments"></a>
         </p>
+
+        <wired-divider></wired-divider>
     </li>
 `;
 

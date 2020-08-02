@@ -2,12 +2,14 @@ import sanitizeHtml from 'sanitize-html';
 
 const allowedTags = [
     ...sanitizeHtml.defaults.allowedTags,
+    'header-nav',
+    'list-container',
+    'load-more',
+    'toogle-btn',
+    'comment-item',
     'news-item',
     'home-page',
-    'list-container',
     'comment-page',
-    'comment-item',
-    'toogle-btn',
 ];
 
 export default allowedTags;

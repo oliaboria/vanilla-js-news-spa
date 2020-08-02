@@ -30,7 +30,7 @@ class HomePage extends HTMLElement {
 
     render() {
         if (this.#loading) {
-            this.#root.innerHTML = `Loading...`;
+            this.#root.innerHTML = `<v-spinner></v-spinner>`;
         } else {
             this.#root.innerHTML = '';
             const homeHtml = document.createDocumentFragment();

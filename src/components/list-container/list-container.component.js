@@ -1,4 +1,4 @@
-import store from '../../utils/store';
+import store from '../../config/store.config';
 
 import template from './list-container.component.template';
 

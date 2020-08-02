@@ -1,6 +1,6 @@
 import { fetchTopStories } from '../../api';
+import store from '../../config/store.config';
 import { PAGE_SIZE } from '../../constants';
-import store from '../../utils/store';
 
 class HomePage extends HTMLElement {
     #root;

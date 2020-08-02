@@ -1,7 +1,14 @@
 import { API_PATH_NAMES, PRETTY_PRINT } from '../constants';
 import request from '../utils/request';
 
-// eslint-disable-next-line import/prefer-default-export
+export const fetchItemById = async (id) => {
+    const item = await request(
+        `${API_PATH_NAMES.item}/${id}.json?${PRETTY_PRINT}`,
+    );
+
+    return item;
+};
+
 export const fetchTopStories = async (orderBy, limitToFirst) => {
     const storiesIds = await request(
         `${API_PATH_NAMES.topstories}?${PRETTY_PRINT}&orderBy="${orderBy}"&limitToFirst=${limitToFirst}`,
@@ -9,12 +16,21 @@ export const fetchTopStories = async (orderBy, limitToFirst) => {
 
     const stories = await Promise.all(
         storiesIds.map(async (storyId) => {
-            const story = await request(
-                `${API_PATH_NAMES.item}/${storyId}.json?${PRETTY_PRINT}`,
-            );
+            const story = await fetchItemById(storyId);
             return story;
         }),
     );
 
     return stories;
+};
+
+export const fetchComments = async (ids) => {
+    const comments = await Promise.all(
+        ids.map(async (id) => {
+            const comment = await fetchItemById(id);
+            return comment;
+        }),
+    );
+
+    return comments;
 };

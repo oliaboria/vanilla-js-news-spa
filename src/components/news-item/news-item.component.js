@@ -1,3 +1,4 @@
+import router from '../../config/router.config';
 import getUrlHost from '../../utils/getUrlHost';
 import timeSince from '../../utils/timeSince';
 
@@ -27,11 +28,7 @@ class NewsItem extends HTMLElement {
 
         this.#commentsEl.addEventListener(
             'click',
-            this.commentsClickHandler.bind(this),
-        );
-        this.#siteEl.addEventListener(
-            'click',
-            this.siteClickHandler.bind(this),
+            this.#commentsClickHandler.bind(this),
         );
 
         this.render();
@@ -62,8 +59,12 @@ class NewsItem extends HTMLElement {
 
     #renderComments() {
         const { descendants } = this.#data;
+
         if (descendants) {
+            const url = this.#buildUrl();
+
             this.#commentsEl.innerText = `${descendants} comments`;
+            this.#commentsEl.setAttribute('href', `${url}`);
         }
     }
 
@@ -80,14 +81,23 @@ class NewsItem extends HTMLElement {
         return JSON.parse(this.getAttribute('data-content')) || {};
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    commentsClickHandler(e) {
+    #commentsClickHandler(e) {
         e.preventDefault();
+
+        const url = this.#buildUrl();
+
+        if (!this.#isSameRoute()) {
+            router.navigateTo(url);
+        }
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    siteClickHandler(e) {
-        e.preventDefault();
+    #buildUrl() {
+        const { id } = this.#data;
+        return `/comments/${id}`;
+    }
+
+    #isSameRoute(url) {
+        return this.#buildUrl() === window.location.pathname;
     }
 }
 

@@ -53,6 +53,20 @@ class Router extends PubSub {
     onRouteChange(fn) {
         this.subscribe(fn);
     }
+
+    getParams(url) {
+        const params = {};
+        const matchedRoute = this.#matchRoute();
+
+        if (matchedRoute) {
+            const groups = url.match(matchedRoute.pattern);
+            const { length } = groups;
+
+            params.id = groups[length - 1] - 0;
+        }
+
+        return params;
+    }
 }
 
 export default Router;

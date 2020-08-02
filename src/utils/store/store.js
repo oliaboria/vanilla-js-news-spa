@@ -16,10 +16,4 @@ class Store {
     }
 }
 
-const storeConfig = {
-    topStories: [],
-};
-
-const store = new Store(storeConfig);
-
-export default store;
+export default Store;

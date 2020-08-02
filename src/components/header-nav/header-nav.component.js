@@ -24,26 +24,22 @@ class HeaderNav extends HTMLElement {
 
         this.#list.setAttribute('selected', selectedItem);
 
-        setTimeout(() => {
-            /* workakound: wired-listbox box model isn't working properly with custom font faces */
-            this.#list.click();
-        });
-
         this.#list.addEventListener('click', this.#onClick.bind(this));
     }
 
     #onClick(e) {
         const { target } = e;
+
         if (target.tagName !== 'WIRED-ITEM') {
             e.stopImmediatePropagation();
         }
 
-        if (target === this.#list) {
-            return;
-        }
-
         const newSelected = target.getAttribute('value');
         this.#list.setAttribute('selected', newSelected);
+
+        if (target.tagName === 'WIRED-LISTBOX') {
+            return;
+        }
 
         const url = target.getAttribute('href');
         router.navigateTo(url);

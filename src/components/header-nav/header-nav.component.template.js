@@ -6,6 +6,10 @@ template.innerHTML = `
             --wired-item-selected-color: darkred;
             --wired-item-selected-bg: pink;
         }
+
+        /* workakound: wired-listbox box model isn't working properly with custom font faces */
+        wired-listbox { width: 301.5px; }
+        wired-item:nth-last-of-type(1) { width: 105.25px; }
     </style>
     <header>
         <wired-listbox

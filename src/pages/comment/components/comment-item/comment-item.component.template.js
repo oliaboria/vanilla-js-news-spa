@@ -10,12 +10,18 @@ template.innerHTML = `
             display: none;
         }
 
+        .comment-heading {
+            display: flex;
+            align-items: center;
+        }
+
         .title {
             font-weight: bold;
+            margin-right: 10px;
         };
     </style>
     <li class="comment-item">
-        <p>
+        <p class="comment-heading">
             <span class="title"></span>
             <toogle-btn></toogle-btn>
         </p>

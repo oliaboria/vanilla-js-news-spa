@@ -46,6 +46,7 @@ class CommentPage extends HTMLElement {
             this.#root.innerHTML = '';
             const commentPageHtml = document.createDocumentFragment();
             const listWrapperEl = document.createElement('ul');
+            listWrapperEl.style = 'list-style: none; padding-left: 0;';
             const newsItemEl = this.#renderNews();
             const commentFormEl = this.#renderCommentForm();
             const commentsListEl = this.#renderCommentsList();

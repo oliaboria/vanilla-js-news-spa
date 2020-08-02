@@ -16,12 +16,12 @@ in the console.
 
 ### `npm start:mobile`
 
-Lets the webpack-dev-server listen for requests from the network, not just localhost.
+Lets the webpack-dev-server listen for requests from the network, not just
+localhost.
 
-Note: works on a Mac, mobile should be connected to the same network.
-Check your current IP: alt + click on wifi icon in the bar
-On mobile device: http://[IP]:3000
-
+Note: works on a Mac, mobile should be connected to the same network. Check your
+current IP: alt + click on wifi icon in the bar On mobile device:
+http://[IP]:3000
 
 ### `npm run lint`
 

@@ -1,3 +1,4 @@
+import CommentItem from './components/comment-item';
 import ListContainer from './components/list-container';
 import LoadMore from './components/load-more';
 import NewsItem from './components/news-item';
@@ -11,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.customElements.define('list-container', ListContainer);
     window.customElements.define('load-more', LoadMore);
     window.customElements.define('comment-page', CommentPage);
+    window.customElements.define('comment-item', CommentItem);
 
     const navLinks = document.querySelectorAll('.navigation-item');
 

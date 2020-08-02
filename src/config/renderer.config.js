@@ -6,6 +6,7 @@ const allowedTags = [
     'home-page',
     'list-container',
     'comment-page',
+    'comment-item',
 ];
 
 export default allowedTags;

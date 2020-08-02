@@ -23,3 +23,14 @@ export const fetchTopStories = async (orderBy, limitToFirst) => {
 
     return stories;
 };
+
+export const fetchComments = async (ids) => {
+    const comments = await Promise.all(
+        ids.map(async (id) => {
+            const comment = await fetchItemById(id);
+            return comment;
+        }),
+    );
+
+    return comments;
+};

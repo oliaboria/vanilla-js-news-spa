@@ -1,4 +1,4 @@
-import { fetchItemById } from '../../api';
+import { fetchItemById, fetchComments } from '../../api';
 import router from '../../config/router.config';
 import store from '../../config/store.config';
 
@@ -54,6 +54,9 @@ class CommentPage extends HTMLElement {
         const { id } = router.getParams(window.location.pathname);
         const item = await fetchItemById(id);
         store.setItem('newsItem', item);
+
+        const comments = await fetchComments(item.kids);
+        store.setItem('comments', comments);
 
         this.#loading = false;
     }

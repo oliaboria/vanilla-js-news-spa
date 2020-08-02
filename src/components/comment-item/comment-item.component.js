@@ -38,22 +38,21 @@ class CommentItem extends HTMLElement {
         const byStr = by ? `${by}` : '';
         const timeStr = time ? `${timeSince(time)} ago` : '';
 
-        this.#titleEl.innerText = `${byStr}${timeStr}`;
+        this.#titleEl.innerText = `${byStr} | ${timeStr}`;
     }
 
     #renderDesciption() {
         const { text } = this.#data;
-
-        this.#descriptionEl.innerHtml = `${text}`;
+        this.#descriptionEl.innerHTML = `${text}`;
     }
 
     #onToogleHandler(e) {
         const { isOpen } = e.detail;
 
         if (isOpen) {
-            this.#descriptionEl.classList.add('display');
+            this.#descriptionEl.classList.remove('hide');
         } else {
-            this.#descriptionEl.classList.remove('display');
+            this.#descriptionEl.classList.add('hide');
         }
     }
 

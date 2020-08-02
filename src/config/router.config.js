@@ -8,7 +8,7 @@ const routerConfig = [
     },
     {
         path: '/news',
-        template: '<news-item />',
+        template: '<p>Coming soon</p>',
     },
     {
         path: '/comments/:id',

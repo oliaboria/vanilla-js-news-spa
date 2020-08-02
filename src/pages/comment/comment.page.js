@@ -30,15 +30,17 @@ class CommentPage extends HTMLElement {
 
     render() {
         if (this.#loading) {
-            this.#root.innerHTML = `Loading...`;
+            this.#root.innerHTML = `<v-spinner></v-spinner>`;
         } else {
             this.#root.innerHTML = '';
             const commentPageHtml = document.createDocumentFragment();
             const listWrapperEl = document.createElement('ul');
             const newsItemEl = this.#renderNews();
+            const commentFormEl = this.#renderCommentForm();
             const commentsListEl = this.#renderCommentsList();
 
             listWrapperEl.appendChild(newsItemEl);
+            listWrapperEl.appendChild(commentFormEl);
             listWrapperEl.appendChild(commentsListEl);
             commentPageHtml.appendChild(listWrapperEl);
             this.#root.appendChild(commentPageHtml);
@@ -60,6 +62,12 @@ class CommentPage extends HTMLElement {
         listEl.setAttribute('config', JSON.stringify(this.#listConfig));
 
         return listEl;
+    }
+
+    #renderCommentForm() {
+        const el = document.createElement('comment-form');
+
+        return el;
     }
 
     async #fetchNewsItem() {

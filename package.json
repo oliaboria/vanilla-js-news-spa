@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "webpack-dev-server --config=./webpack/webpack.dev.js",
+        "start:mobile": "webpack-dev-server --config=./webpack/webpack.dev.js --host 0.0.0.0",
         "test": "echo \"Error: no test specified\" && exit 1",
         "lint": "eslint \"./**/*.js\"",
         "lint:style": "stylelint \"./**/*.css\"",

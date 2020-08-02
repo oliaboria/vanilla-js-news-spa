@@ -7,6 +7,7 @@ const allowedTags = [
     'list-container',
     'comment-page',
     'comment-item',
+    'toogle-btn',
 ];
 
 export default allowedTags;

@@ -4,8 +4,7 @@ template.innerHTML = `
     <li class="comment-item">
         <p>
             <span class="title"></span>
-            <button class="more-btn"></button>
-            <button class="more-btn">[-]</button>
+            <toogle-btn></toogle-btn>
         </p>
         <p class="description"></p>
     </li>

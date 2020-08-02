@@ -2,6 +2,7 @@ import CommentItem from './components/comment-item';
 import ListContainer from './components/list-container';
 import LoadMore from './components/load-more';
 import NewsItem from './components/news-item';
+import Toogle from './components/toogle';
 import router from './config/router.config';
 import CommentPage from './pages/comment';
 import HomePage from './pages/home';
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.customElements.define('load-more', LoadMore);
     window.customElements.define('comment-page', CommentPage);
     window.customElements.define('comment-item', CommentItem);
+    window.customElements.define('toogle-btn', Toogle);
 
     const navLinks = document.querySelectorAll('.navigation-item');
 

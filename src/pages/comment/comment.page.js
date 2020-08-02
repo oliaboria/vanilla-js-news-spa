@@ -4,6 +4,7 @@ import store from '../../config/store.config';
 
 class CommentPage extends HTMLElement {
     #root;
+    #listConfig;
 
     static get observedAttributes() {
         return ['loading'];
@@ -13,6 +14,10 @@ class CommentPage extends HTMLElement {
         super();
 
         this.#root = this.attachShadow({ mode: 'open' });
+        this.#listConfig = {
+            storeKey: 'comments',
+            component: 'comment-item',
+        };
     }
 
     async connectedCallback() {
@@ -29,11 +34,13 @@ class CommentPage extends HTMLElement {
         } else {
             this.#root.innerHTML = '';
             const commentPageHtml = document.createDocumentFragment();
+            const listWrapperEl = document.createElement('ul');
             const newsItemEl = this.#renderNews();
-            // const listEl = this.#renderList();
-            // const loadMoreEl = this.#renderLoadMore();
-            commentPageHtml.appendChild(newsItemEl);
-            // homeHtml.appendChild(loadMoreEl);
+            const commentsListEl = this.#renderCommentsList();
+
+            listWrapperEl.appendChild(newsItemEl);
+            commentPageHtml.appendChild(listWrapperEl);
+            commentPageHtml.appendChild(commentsListEl);
             this.#root.appendChild(commentPageHtml);
         }
     }
@@ -45,6 +52,14 @@ class CommentPage extends HTMLElement {
         el.setAttribute('data-content', JSON.stringify(data));
 
         return el;
+    }
+
+    #renderCommentsList() {
+        const listEl = document.createElement('list-container');
+
+        listEl.setAttribute('config', JSON.stringify(this.#listConfig));
+
+        return listEl;
     }
 
     async #fetchNewsItem() {
